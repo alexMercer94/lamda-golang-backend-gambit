@@ -57,3 +57,35 @@ func ConnStr(key models.SecretRDSJson) string {
 	fmt.Println(dsn)
 	return dsn
 }
+
+/*
+* Validar si un usuario es Administrador
+ */
+func UserIsAdmin(userUUID string) (bool, string) {
+	fmt.Println("Comienza UserIsAdmin")
+
+	err := DbConnect()
+	if err != nil {
+		return false, err.Error()
+	}
+	defer Db.Close()
+
+	// Query para encontrar si existe el Admin
+	query := fmt.Sprintf(`SELECT 1 FROM users WHERE User_UUID='%v' AND User_Status=0`, userUUID)
+
+	rows, err := Db.Query(query)
+	if err != nil {
+		return false, err.Error()
+	}
+
+	var value string
+	rows.Next()       // Posicionarse en el primer registro
+	rows.Scan(&value) // Leer el registro actual y grabar datos en una variable
+	fmt.Println("UserIsAdmin > Ejecucion exitosa -> valor devuelto " + value)
+
+	if value == "1" {
+		return true, ""
+	}
+
+	return false, "User is not Admin"
+}

@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"backend/lamda-golang-backend-gambit/auth"
+	"backend/lamda-golang-backend-gambit/routers"
 
 	"github.com/aws/aws-lambda-go/events"
 )
@@ -51,6 +52,11 @@ func ProductsProcess(body string, path string, method string, user string, id in
 }
 
 func CategoryProcess(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {
+	switch method {
+	case "POST":
+		return routers.InsertCategory(body, user)
+	}
+
 	return 400, "Method Invalid"
 }
 
