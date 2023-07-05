@@ -13,7 +13,7 @@ import (
 /*
 Handlers para las Rutas de la API
 */
-func Handlers(path string, method string, body string, headers map[string]string, request events.APIGatewayV2HTTPRequest) (int, string) {
+func Handlers(path string, method string, body string, headers map[string]string, request events.APIGatewayProxyRequest) (int, string) {
 	fmt.Println("Se va a procesar " + path + " > " + method)
 
 	id := request.PathParameters["id"]
@@ -43,15 +43,15 @@ func Handlers(path string, method string, body string, headers map[string]string
 	return 400, "Method Invalid"
 }
 
-func UsersProcess(body string, path string, method string, user string, id string, request events.APIGatewayV2HTTPRequest) (int, string) {
+func UsersProcess(body string, path string, method string, user string, id string, request events.APIGatewayProxyRequest) (int, string) {
 	return 400, "Method Invalid"
 }
 
-func ProductsProcess(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {
+func ProductsProcess(body string, path string, method string, user string, id int, request events.APIGatewayProxyRequest) (int, string) {
 	return 400, "Method Invalid"
 }
 
-func CategoryProcess(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {
+func CategoryProcess(body string, path string, method string, user string, id int, request events.APIGatewayProxyRequest) (int, string) {
 	switch method {
 	case "POST":
 		return routers.InsertCategory(body, user)
@@ -60,15 +60,15 @@ func CategoryProcess(body string, path string, method string, user string, id in
 	return 400, "Method Invalid"
 }
 
-func StockProcess(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {
+func StockProcess(body string, path string, method string, user string, id int, request events.APIGatewayProxyRequest) (int, string) {
 	return 400, "Method Invalid"
 }
 
-func AddressesProcess(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {
+func AddressesProcess(body string, path string, method string, user string, id int, request events.APIGatewayProxyRequest) (int, string) {
 	return 400, "Method Invalid"
 }
 
-func OrdersProcess(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {
+func OrdersProcess(body string, path string, method string, user string, id int, request events.APIGatewayProxyRequest) (int, string) {
 	return 400, "Method Invalid"
 }
 

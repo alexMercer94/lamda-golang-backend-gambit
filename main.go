@@ -24,7 +24,7 @@ func main() {
 /*
 Logica de la lambda
 */
-func ExecuteLambda(ctx context.Context, request events.APIGatewayV2HTTPRequest) (*events.APIGatewayProxyResponse, error) {
+func ExecuteLambda(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	// Se inicializa AWS
 	awsgo.InitializeAWS()
 
@@ -35,8 +35,8 @@ func ExecuteLambda(ctx context.Context, request events.APIGatewayV2HTTPRequest) 
 
 	// Se obtienen los valores para los Handlers
 	var res *events.APIGatewayProxyResponse
-	path := strings.Replace(request.RawPath, os.Getenv("UrlPrefix"), "", -1)
-	method := request.RequestContext.HTTP.Method
+	path := strings.Replace(request.RequestContext.ResourcePath, os.Getenv("UrlPrefix"), "", -1)
+	method := request.RequestContext.HTTPMethod
 	body := request.Body
 	headers := request.Headers
 
