@@ -51,10 +51,15 @@ func ProductsProcess(body string, path string, method string, user string, id in
 	return 400, "Method Invalid"
 }
 
+/*
+* Handler para Categorías
+ */
 func CategoryProcess(body string, path string, method string, user string, id int, request events.APIGatewayProxyRequest) (int, string) {
 	switch method {
 	case "POST":
 		return routers.InsertCategory(body, user)
+	case "PUT":
+		return routers.UpdateCategory(body, user, id)
 	}
 
 	return 400, "Method Invalid"
